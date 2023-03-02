@@ -1,44 +1,45 @@
-import { useEffect } from "react";
-import { useCreatePostMutation, apiSlice } from "../api/apiSlice";
-import { store } from "../store";
-import { Col, Row, Form, Button } from 'react-bootstrap';
+import React from 'react'
+import { useEffect } from 'react'
+import { useCreatePostMutation, apiSlice } from '../api/apiSlice'
+import { store } from '../store'
+import { Col, Row, Form, Button } from 'react-bootstrap'
 
 
 const PostForm = () => {
 
-  const dispatch = store.dispatch;
-  const [createPost, result] = useCreatePostMutation();
+  const dispatch = store.dispatch
+  const [createPost, result] = useCreatePostMutation()
 
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     
-    const name = e.target.elements.name.value.trim();
-    const description = e.target.elements.description.value.trim();
+    const name = e.target.elements.name.value.trim()
+    const description = e.target.elements.description.value.trim()
     
     createPost({
       name,
       description
-    });
-    e.target.reset();
-  };
+    })
+    e.target.reset()
+  }
 
   useEffect(() => {
     result.data && dispatch(
       apiSlice.util.updateQueryData('getPosts', undefined, (draft) => {
         draft.push(result.data)
       })
-    );
-  }, [result.data, dispatch]);
+    )
+  }, [result.data, dispatch])
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
         <Form.Group as={Col} controlId='name' >
-            <Form.Control type='text' placeholder="Nombre"/>
+          <Form.Control type='text' placeholder="Nombre"/>
         </Form.Group>
         <Form.Group as={Col} controlId='description' >
-            <Form.Control type='text' placeholder="Descripción"/>
+          <Form.Control type='text' placeholder="Descripción"/>
         </Form.Group>
           
         <Form.Group as={Col} className='text-center'>
@@ -49,6 +50,6 @@ const PostForm = () => {
       </Row>
     </Form>
   )
-};
+}
 
-export default PostForm;
+export default PostForm

@@ -1,13 +1,14 @@
-import PostsList from "./components/PostsList";
-import PostForm from "./components/PostForm"
-import { Container } from 'react-bootstrap';
+import React from 'react'
+import PostsList from './components/PostsList'
+import PostForm from './components/PostForm'
+import { Container } from 'react-bootstrap'
 
 function App() {
-    return (
+  return (
     <Container>
       <PostsList/>
       <PostForm/>
     </Container > 
-)}
+  )}
 
-export default App;
+export default App
